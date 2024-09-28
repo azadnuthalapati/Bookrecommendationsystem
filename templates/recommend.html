@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #141414;
+            font-family: 'Roboto', sans-serif;
+        }
+        .navbar {
+            background-color: #00a65a;
+        }
+        .navbar-brand, .navbar-nav li a {
+            color: white !important;
+        }
+        h1 {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 50px;
+            font-weight: 700;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Enhanced input text field styling */
+        .form-control {
+            font-size: 18px;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            background: linear-gradient(145deg, #00a65a, #28d17c);
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+        .form-control:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(0, 255, 127, 0.7);
+            border-color: #00ff7f;
+        }
+        .form-control::placeholder {
+            color: #d4d4d4;
+            font-style: italic;
+        }
+        .btn-warning {
+            font-size: 18px;
+            padding: 10px 30px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #2a2a2a;
+            border: none;
+            border-radius: 15px;
+            transition: transform 0.3s;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        }
+        .card-img-top {
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto;
+            border-radius: 15px 15px 0 0;
+        }
+        .card-body {
+            padding: 20px;
+            text-align: center;
+        }
+        .card-body h4, .card-body p {
+            margin: 5px 0;
+            color: #e0e0e0;
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Message box styling */
+        .message-box {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .alert-message {
+            display: inline-block;
+            padding: 15px 25px;
+            background-color: #ffcc00;
+            color: #cb2626;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        /* Responsive behavior */
+        @media (max-width: 992px) {
+            .col-md-3 {
+                width: 50%;
+            }
+        }
+        @media (max-width: 768px) {
+            .col-md-3 {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand">My Book Recommender</a>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/recommend">Recommend</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Recommend Books</h1>
+
+        <!-- Display message if available -->
+        <div class="row">
+            <div class="col-md-12 message-box">
+                {% if message %}
+                    <div class="alert-message">
+                        {{ message }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Book recommendation form -->
+        <div class="row">
+            <div class="col-md-12">
+                <form action="/recommend_books" method="post">
+                    <input name="user_input" type="text" class="form-control" placeholder="Enter book name from the Top Books on Home Page">
+                    <br>
+                    <input name="engine_1" type="submit" class="btn btn-lg btn-warning" value="Recommend through Engine 1 (Basic Collaborative Filtering)">
+                    <input name="engine_2" type="submit" class="btn btn-lg btn-warning" value="Recommend through Engine 2 (KNN ML Algorithm)">
+                </form>
+            </div>
+        </div>
+
+        <!-- Display book recommendations -->
+        <div class="row row-flex" style="margin-top: 50px;">
+            {% if data %}
+                {% for i in data %}
+                    <div class="col-md-3 col-sm-6">
+                        <div class="card">
+                            <img class="card-img-top" src="{{i[2]}}" alt="{{i[0]}}">
+                            <div class="card-body card-content">
+                                <p>{{i[0]}}</p>
+                                <h4>{{i[1]}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>
+

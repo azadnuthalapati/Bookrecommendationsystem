@@ -1,5 +1,7 @@
 # Book Recommendation System
-A Book recommendation system built based on Popularity based filtering and Collaborative based filtering techniques. And also used K Nearest Neighbors Machine Learning Algorithm to provide book recommendations for comparison.
-Go to master branch to see files and Jupyter Notebook
-Click on this Web link to experiment: 
+Dive into an intelligent recommendation engine that suggests books tailored to your tastes! This system harnesses the power of Popularity-based filtering and Collaborative filtering techniques, offering personalized book suggestions based on user preferences and trends. For comparison, we’ve also integrated the K Nearest Neighbors (KNN) Machine Learning Algorithm, providing another layer of recommendations based on book similarity.
+
+Explore the master branch to view the source code and Jupyter Notebook, and experiment with the system yourself by clicking the link below:
+
 https://bookrecommendationsystem-lpvc.onrender.com
+Please note that it may take around 55 seconds for the system to load.
